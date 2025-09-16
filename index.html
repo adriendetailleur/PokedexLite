@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pokédex Lite</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="app.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>Pokedex Lite</h1>
+    </header>
+    
+    <form id="search">
+        <input id="q" type="search" name="q"
+               placeholder="Pikachu, bulbizarre..."
+               autocomplete="off" autocapitalize="none" spellcheck="false"/>
+        <label for="q" class="sr-only">Rechercher un Pokémon</label>
+        <button type="submit" class="sr-only">Rechercher</button>
+    </form>
+
+    <section id="result"></section>
+
+    <p id="sr-status" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></p>
+</body>
+</html>
