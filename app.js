@@ -1,4 +1,10 @@
+// @ts-check
 "use strict";
+
+/**
+ * Les états possibles de l’UI.
+ * @typedef {'idle' | 'loading' | 'success' | 'empty' | 'error'} State
+ */;
 
 /** @type {HTMLInputElement | null} */
 const q = document.querySelector('#q');
