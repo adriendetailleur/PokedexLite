@@ -6,6 +6,11 @@
  * @typedef {'idle' | 'loading' | 'success' | 'empty' | 'error'} State
  */
 
+/**
+ * PokemonDTO.
+ * @typedef {{ id: number, name: string, height: number, weight: number, types: string[], spriteUrl: string}} PokemonDTO
+ */
+
 /** @type {HTMLInputElement | null} */
 const q = document.querySelector('#q');
 const result = document.querySelector('#result');
@@ -73,4 +78,13 @@ function render(state, data) {
         result.appendChild(p);
     }
     result.setAttribute('aria-busy', state === 'loading' ? 'true' : 'false');
+}
+
+/**
+ * @param {string} name
+ * @param {{ signal?: AbortSignal }=} options
+ * @returns {Promise<PokemonDTO>}
+ */
+function fetchPokemon(name, { signal } = {}) {
+    throw new Error('Not implemented');
 }
