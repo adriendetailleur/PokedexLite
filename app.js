@@ -79,3 +79,12 @@ function render(state, data) {
     }
     result.setAttribute('aria-busy', state === 'loading' ? 'true' : 'false');
 }
+
+/**
+ * @param {string} name
+ * @param {{ signal?: AbortSignal }=} options
+ * @returns {Promise<PokemonDTO>}
+ */
+function fetchPokemon(name, { signal } = {}) {
+    throw new Error('Not implemented');
+}
