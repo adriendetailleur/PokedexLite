@@ -4,7 +4,7 @@
 /**
  * Les états possibles de l’UI.
  * @typedef {'idle' | 'loading' | 'success' | 'empty' | 'error'} State
- */;
+ */
 
 /** @type {HTMLInputElement | null} */
 const q = document.querySelector('#q');
@@ -15,9 +15,11 @@ if (!q) { console.error('[init] missing #q'); }
 if (!result) { console.error('[init] missing #result'); }
 if (!srStatus) { console.error('[init] missing #sr-status'); }
 
+render('idle');
+
 /**
  * @param {State} state 
- * @param {*} data 
+ * @param {*} [data] 
  */
 function describeState(state, data) {
     let aria = '', heading = '', body = '';
@@ -40,7 +42,7 @@ function describeState(state, data) {
         case 'empty':
             aria = 'Aucun résultat';
             heading = 'Aucun résultat';
-            body = ''
+            body = '';
             break;
         case 'error':
             aria = data?.message ?? 'Erreur';
@@ -53,7 +55,7 @@ function describeState(state, data) {
 
 /**
  * @param {State} state 
- * @param {*} data 
+ * @param {*} [data] 
  */
 function render(state, data) {
     if (!srStatus || !result) return;
@@ -70,4 +72,5 @@ function render(state, data) {
         p.textContent = body;
         result.appendChild(p);
     }
+    result.setAttribute('aria-busy', state === 'loading' ? 'true' : 'false');
 }
