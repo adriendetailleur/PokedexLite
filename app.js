@@ -6,6 +6,11 @@
  * @typedef {'idle' | 'loading' | 'success' | 'empty' | 'error'} State
  */
 
+/**
+ * PokemonDTO.
+ * @typedef {{ id: number, name: string, height: number, weight: number, types: string[], spriteUrl: string}} PokemonDTO
+ */
+
 /** @type {HTMLInputElement | null} */
 const q = document.querySelector('#q');
 const result = document.querySelector('#result');
