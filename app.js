@@ -15,6 +15,15 @@
 const q = document.querySelector('#q');
 const result = document.querySelector('#result');
 const srStatus = document.querySelector('#sr-status');
+/** @type {HTMLFormElement | null} */
+const form = document.querySelector('#search');
+
+if (!form) {
+    console.error('[init] missing #search');
+} 
+else {
+    form.addEventListener('submit', handleSearchSubmit);
+}
 
 if (!q) { console.error('[init] missing #q'); }
 if (!result) { console.error('[init] missing #result'); }
@@ -87,4 +96,43 @@ function render(state, data) {
  */
 function fetchPokemon(name, { signal } = {}) {
     throw new Error('Not implemented');
+}
+
+/**
+ * @param {SubmitEvent} event
+ */
+function handleSearchSubmit(event) {
+    if (!q) return;
+    event.preventDefault();
+    const name = q?.value.trim().toLowerCase();
+    if (name === '') {
+        render('idle');
+        return;
+    }
+    else {
+        render('loading');
+        simulateFetch(name, (/** @type {any} */ result) => {
+            render(result.state, result.data);
+        });
+    }
+}
+
+/** @typedef {{ state: State, data?: any }} SimulatedResult */
+
+/** @param {string|undefined} name @param {(r: SimulatedResult)=>void} onDone */
+function simulateFetch(name, onDone) {
+    const normalizedName = String(name ?? '').trim().toLowerCase();
+    
+    const delayMs = 500;
+    const timeoutId = setTimeout(() => {
+        const isEmpty = normalizedName.startsWith('x');
+        if (isEmpty) {
+            onDone({ state: 'empty' });
+        }
+        else {
+        onDone({ state: 'success', data: { name: normalizedName } });
+        }
+    }, delayMs);
+
+    return () => clearTimeout(timeoutId);
 }
