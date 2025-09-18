@@ -50,3 +50,24 @@ function describeState(state, data) {
     }
     return { aria, heading, body };
 }
+
+/**
+ * @param {State} state 
+ * @param {*} data 
+ */
+function render(state, data) {
+    if (!srStatus || !result) return;
+    const { aria, heading, body } = describeState(state, data);
+    srStatus.textContent = aria;
+    result.textContent = '';
+    if (heading) {
+        const h2 = document.createElement('h2');
+        h2.textContent = heading;
+        result.appendChild(h2);
+    }
+    if (body) {
+        const p = document.createElement('p');
+        p.textContent = body;
+        result.appendChild(p);
+    }
+}
